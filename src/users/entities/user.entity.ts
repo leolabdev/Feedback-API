@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Feedback } from "src/feedback/entities/feedback.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -20,5 +21,8 @@ export class User {
 
     @Column({ default: true })
     isValid: boolean;
+
+    @OneToMany(() => Feedback, (feedback) => feedback.user)
+    feedbacks?: Feedback[];
 
 }
