@@ -19,7 +19,7 @@ export class UsersService {
     }
 
 
-    async handleGetUserRequest(): Promise<User[]> {
+    async handleGetUsersRequest(): Promise<User[]> {
         return await this.userRepository.find();
 
     }
