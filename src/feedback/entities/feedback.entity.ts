@@ -21,15 +21,19 @@ export class Feedback {
     @Column()
     project_feedback: string;
 
+    @ApiProperty()
     @CreateDateColumn()
     created: Date;
 
+    @ApiProperty()
     @UpdateDateColumn()
     modified: Date;
 
     @ApiProperty()
     isValid?: boolean;
 
+
+    @ApiProperty({ type: () => User })
     @ManyToOne(() => User, (user) => user.feedbacks)
     user: User;
 
