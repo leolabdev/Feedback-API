@@ -27,7 +27,8 @@ export class Feedback {
     @UpdateDateColumn()
     modified: Date;
 
-
+    @ApiProperty()
+    isValid?: boolean;
 
     @ManyToOne(() => User, (user) => user.feedbacks)
     user: User;

@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
+import { Feedback } from "src/feedback/entities/feedback.entity";
 
 export class CreateUserDto {
     @ApiProperty()
@@ -16,4 +17,6 @@ export class CreateUserDto {
     modified?: Date;
     @ApiProperty()
     isValid?: boolean;
+    @ApiProperty()
+    feedbacks?: Feedback[]
 }

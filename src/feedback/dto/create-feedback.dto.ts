@@ -3,6 +3,9 @@ import { IsString, Length } from "class-validator";
 
 export class CreateFeedbackDto {
 
+    @ApiProperty()
+    id?: number;
+
     @ApiProperty({ example: 'Umbrella', description: 'The project name ' })
     @IsString()
     project_name: string;
@@ -15,5 +18,14 @@ export class CreateFeedbackDto {
     @IsString()
     @Length(10, 200)
     project_feedback: string;
+
+    @ApiProperty()
+    created?: Date;
+    @ApiProperty()
+    modified?: Date;
+    @ApiProperty()
+    isValid?: boolean;
+    @ApiProperty()
+    user?: string;
 
 }
