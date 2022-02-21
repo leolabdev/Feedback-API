@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from './entities/feedback.entity';
@@ -11,7 +11,7 @@ import { FeedbackService } from './feedback.service';
 export class FeedbackController {
     constructor(private feedbacksService: FeedbackService) { }
 
-    @Post()
+    @Post('create')
     @ApiOperation({ summary: 'Create feedback' })
     @ApiCreatedResponse({
         description: 'Feedback has been succefully created ',
@@ -27,10 +27,10 @@ export class FeedbackController {
     @ApiResponse({ status: 200, description: 'Ok' })
     // @UseGuards(JwtAuthGuard)
     async getFeedbacks(): Promise<Feedback[]> {
-        return this.feedbacksService.handleGetFeedbacksRequest();
+        return await this.feedbacksService.handleGetFeedbacksRequest();
     }
 
-    @Get(':id')
+    @Get(':id/getOne')
     @ApiOperation({ summary: 'Get a feedback' })
     @ApiResponse({ status: 200, description: 'Ok' })
     @ApiResponse({ status: 404, description: 'could not find matching feedback' })
@@ -39,7 +39,20 @@ export class FeedbackController {
         return await this.feedbacksService.getFeedbackById(id);
     }
 
-    @Delete(':id')
+
+    @Put(':id/update')
+    @ApiOperation({ summary: 'Update a feedback' })
+    @ApiResponse({ status: 200, description: 'Ok' })
+    @ApiResponse({ status: 404, description: 'could not find matching feedback' })
+    async update(@Param('id') id, @Body() feedback: Feedback): Promise<any> {
+        feedback.id = Number(id);
+        return await this.feedbacksService.updateFeedback(feedback);
+    }
+
+
+
+
+    @Delete(':id/delete')
     @ApiOperation({ summary: 'Delete a feedback' })
     @ApiResponse({ status: 200, description: 'Deleted' })
     @ApiResponse({ status: 404, description: 'could not find matching photo' })

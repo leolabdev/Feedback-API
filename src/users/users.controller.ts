@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -9,7 +9,7 @@ import { UsersService } from './users.service';
 export class UsersController {
     constructor(private usersService: UsersService) { }
 
-    @Post()
+    @Post('create')
     @ApiOperation({ summary: 'Create User' })
     @ApiCreatedResponse({
         description: 'User has been succefully created ',
@@ -28,7 +28,7 @@ export class UsersController {
         return await this.usersService.handleGetUsersRequest();
     }
 
-    @Get(':id')
+    @Get(':id/getOne')
     @ApiOperation({ summary: 'Get an User' })
     @ApiResponse({ status: 200, description: 'Ok' })
     @ApiResponse({ status: 404, description: 'cuold not find matching user id' })
@@ -40,14 +40,14 @@ export class UsersController {
     // @Patch(':id')
     // @ApiOperation({summary: 'Updated'})
     // @ApiResponse({status:200, description: 'Ok'})
-    //@ApiResponse({status:404, description: 'cuold not find matching user id'})
+    // @ApiResponse({status:404, description: 'cuold not find matching user id'})
     // async updateUser(@Param('id') id: string, @Body() createUserDto: CreateUserDto): Promise<User> {
     //   return await this.usersService.updateUserById(id,CreateUserDto);
     // }
 
 
 
-    @Delete(':id')
+    @Delete(':id/delete')
     @ApiOperation({ summary: 'Delete an User' })
     @ApiResponse({ status: 200, description: 'Deleted' })
     @ApiResponse({ status: 404, description: 'could not find matching user id' })

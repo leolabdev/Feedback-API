@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersService } from 'src/users/users.service';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from './entities/feedback.entity';
 
@@ -46,8 +46,8 @@ export class FeedbackService {
     }
 
 
-    async findFeedbackByName(jokeName: string): Promise<Feedback> {
-        const feedback = await this.feedbacksRepository.findOne({ where: { name: jokeName } });
+    async findFeedbackByName(feedbackName: string): Promise<Feedback> {
+        const feedback = await this.feedbacksRepository.findOne({ where: { name: feedbackName } });
         return feedback;
     }
 
@@ -56,6 +56,12 @@ export class FeedbackService {
         return await this.feedbacksRepository.findOneOrFail(id, {
         });
     }
+
+    async updateFeedback(feedback: Feedback): Promise<UpdateResult> {
+
+        return await this.feedbacksRepository.update(feedback.id, feedback);
+    }
+
 
     async deleteFeedback(id: string): Promise<Feedback> {
         const feedback = await this.feedbacksRepository.findOneOrFail(id,);

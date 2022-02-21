@@ -36,6 +36,9 @@ export class UsersService {
     }
 
 
+
+
+
     async findUserByUserName(username: string): Promise<User> {
         return await this.userRepository.findOne({
             where: { username: username },
