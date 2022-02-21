@@ -7,7 +7,23 @@ import { FeedbackModule } from './feedback/feedback.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), UsersModule, FeedbackModule],
+  imports: [TypeOrmModule.forRoot({
+
+    type: "sqlite",
+    database: "database/homework.db",
+    entities: [
+      "dist/**/**/*.entity{.ts,.js}"
+    ],
+    synchronize: true,
+    migrations: [
+      "dist/database/migrations/*.js"
+    ],
+    cli: {
+      "migrationsDir": "database/migrations"
+    },
+    logging: true
+
+  }), UsersModule, FeedbackModule],
   controllers: [AppController, UsersController],
   providers: [AppService],
 })
