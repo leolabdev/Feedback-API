@@ -30,6 +30,7 @@ export class Feedback {
     modified: Date;
 
     @ApiProperty()
+    @Column({ default: 1 })
     isValid?: boolean;
 
 
