@@ -17,6 +17,8 @@ const swaggerInfo = {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // for communicating with our REST API from an Angular frontend running on another domain we need to enable CORS.
+  app.enableCors();
 
   const config = new DocumentBuilder()
     // .addBearerAuth(
