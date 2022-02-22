@@ -14,11 +14,13 @@ import { MatTableModule } from '@angular/material/table';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    FeedbackComponent,
     // FeedbackComponent
   ],
   imports: [
