@@ -4,7 +4,7 @@ import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from './entities/feedback.entity';
 import { FeedbackService } from './feedback.service';
 
-@Controller('feedback')
+
 
 @Controller('feedbacks')
 @ApiTags('feedbacks')
