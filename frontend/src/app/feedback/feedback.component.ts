@@ -12,7 +12,7 @@ import { Feedback } from '../feedback';
 export class FeedbackComponent implements OnInit {
 
   // The displayedComumns variable holds the name of the columns that are displayed in the Angular Material Table
-  displayedColumns: string[] = ['id', 'project_name', 'project_url', 'project_feedback', 'created', 'modified', 'isValid', 'user'];
+  displayedColumns: string[] = ['id', 'project_name', 'project_url', 'project_feedback', 'created', 'modified', 'isValid', 'user', 'actions'];
   // The dataSource variable  contains the data of the table
   // The dataSource variable  contains the data of the table
   dataSource: any[] = [];
@@ -46,13 +46,13 @@ export class FeedbackComponent implements OnInit {
 
   }
 
-  deleteContact(id: any) {
+  deleteFeedback(id: any) {
     this.apiService.deleteFeedback(id).subscribe((result) => {
       console.log(result);
     });
   }
 
-  updateContact(f: any) {
+  updateFeedback(f: any) {
     console.log("Update", f.value)
     f.value.id = this.feedback['id'];
     this.apiService.updateFeedback(f.value).subscribe((result) => {
