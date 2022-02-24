@@ -1,0 +1,15 @@
+{
+    "type": "sqlite",
+    "database": "database/homework.db",
+    "entities": [
+        "dist/**/**/*.entity{.ts,.js}"
+    ],
+    "synchronize": true,
+    "migrations": [
+        "dist/database/migrations/*.js"
+    ],
+    "cli": {
+        "migrationsDir": "database/migrations"
+    },
+    "logging": "true"
+}

@@ -1,3 +1,6 @@
+import { User } from "./user";
+
+
 export class Feedback {
 
     id!: number;
