@@ -5,6 +5,6 @@
 
 npm install 
 
-npm run start, Navigate to http://localhost:3000/
+npm run start, navigate to http://localhost:3000/
 
 
