@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from './entities/feedback.entity';
 import { FeedbackService } from './feedback.service';
 //import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 
 @Controller('feedbacks')
@@ -17,7 +18,7 @@ export class FeedbackController {
         description: 'Feedback has been succefully created ',
         type: Feedback
     })
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     async createFeedback(@Body() createFeedbackDto: CreateFeedbackDto): Promise<Feedback> {
         return await this.feedbacksService.handleCreateFeedbackRequest(createFeedbackDto);
     }
@@ -25,7 +26,7 @@ export class FeedbackController {
     @Get()
     @ApiOperation({ summary: 'Get all feedbacks' })
     @ApiResponse({ status: 200, description: 'Ok' })
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     async getFeedbacks(): Promise<Feedback[]> {
         return await this.feedbacksService.handleGetFeedbacksRequest();
     }
@@ -34,7 +35,7 @@ export class FeedbackController {
     @ApiOperation({ summary: 'Get a feedback' })
     @ApiResponse({ status: 200, description: 'Ok' })
     @ApiResponse({ status: 404, description: 'could not find matching feedback' })
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     async getFeedback(@Param('id') id: string): Promise<Feedback> {
         return await this.feedbacksService.getFeedbackById(id);
     }
@@ -44,6 +45,7 @@ export class FeedbackController {
     @ApiOperation({ summary: 'Update a feedback' })
     @ApiResponse({ status: 200, description: 'Ok' })
     @ApiResponse({ status: 404, description: 'could not find matching feedback' })
+    @UseGuards(JwtAuthGuard)
     async update(@Param('id') id, @Body() feedback: Feedback): Promise<any> {
         feedback.id = Number(id);
         return await this.feedbacksService.updateFeedback(feedback);
@@ -56,7 +58,7 @@ export class FeedbackController {
     @ApiOperation({ summary: 'Delete a feedback' })
     @ApiResponse({ status: 200, description: 'Deleted' })
     @ApiResponse({ status: 404, description: 'could not find matching photo' })
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     async deleteFeetback(@Param('id') id: string): Promise<Feedback> {
         return await this.feedbacksService.deleteFeedback(id);
     }
