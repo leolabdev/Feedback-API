@@ -21,10 +21,10 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
-    // .addBearerAuth(
-    //   { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-    //   'access-token',
-    // )
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    )
     .setTitle(swaggerInfo.title)
     .setDescription(swaggerInfo.decription)
     .setVersion(swaggerInfo.version)
