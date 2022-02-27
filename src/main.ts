@@ -21,6 +21,7 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
+
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
       'access-token',
