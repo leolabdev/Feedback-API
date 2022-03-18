@@ -27,7 +27,7 @@ For enabling jwt we need uncomment in src/feedback/feedback.controller.ts all @U
 
 After it we can test it via Postman:
 
-1) Create new user,  Post http://localhost:3000/users with  {
+1) Create new user,  Post http://localhost:3000/users/create with  {
  "username": "student",
  "password": "Koodaus1"
 } 
